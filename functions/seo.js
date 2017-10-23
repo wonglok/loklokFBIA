@@ -73,6 +73,11 @@ app.get('/rss/dev', (req, res) => {
   }))
 })
 
+app.get('/.well-known/acme-challenge/oB0iXwyzRXSMJgpcVD5zseEINNhOu4J9bnK-nRRFWBk', (req, res) => {
+  var confirmCode = fs.readFileSync(path.resolve(__dirname, './code/oB0iXwyzRXSMJgpcVD5zseEINNhOu4J9bnK-nRRFWBk'), 'utf8')
+  res.send(confirmCode)
+})
+
 app.get('*', (req, res) => {
   // res.set('Cache-Control', 'public, max-age=60, s-maxage=180')
   Promise.all([
