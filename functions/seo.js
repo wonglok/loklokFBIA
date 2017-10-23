@@ -78,7 +78,11 @@ var metaReplacer = (str, newStr) => {
   return str.replace(`<meta name=loklokfbia content=12345>`, newStr)
 }
 var appDivReplacer = (str, newStr) => {
-  return str.replace(`<div id=app></div>`, newStr)
+  return str.replace(`<div id=app></div>`, `
+    <div id="app">
+      ${newStr}
+    </div>
+  `)
 }
 
 app.get('*', (req, res) => {
