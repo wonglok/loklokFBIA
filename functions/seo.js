@@ -58,7 +58,7 @@ var appDivReplacer = (str, newStr) => {
 }
 
 var htmlTagReplacer = (str) => {
-  return str.reaplce(
+  return str.replace(
     `<html lang=en>`,
     `<html lang=en prefix="op: http://media.facebook.com/op#">`
   )
