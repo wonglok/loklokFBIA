@@ -3,11 +3,15 @@ var functions = require('firebase-functions')
 const express = require('express')
 
 const config = require('./config.js').config
-const convertToFbia = require('article-json-to-fbia')
+// const convertToFbia = require('article-json-to-fbia')
+var Handlebars = require('handlebars')
 
 var fs = require('fs')
 var path = require('path')
 var appHTML = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf8')
+var articleHB = fs.readFileSync(path.resolve(__dirname, './templates/sample.handlebars'), 'utf8')
+
+var articleTemplate = Handlebars.compile(articleHB)
 
 const app = express()
 const cors = require('cors')({origin: true})
@@ -17,7 +21,11 @@ var composeMetaTags = ({ req, res }) => {
   return new Promise((resolve, reject) => {
     //
     resolve(
-      `<meta property="fb:pages" content="${config.pageID}" />`
+      `
+      <meta property="fb:pages" content="${config.pageID}" />
+      <link rel="canonical" href="http://example.com/article.html">
+      <meta property="op:markup_version" content="v1.0">
+      `
     )
     //
   })
@@ -25,51 +33,15 @@ var composeMetaTags = ({ req, res }) => {
 
 var composeAppDiv = ({ req, res }) => {
   return new Promise((resolve, reject) => {
-    var articleJSON = [
-      {
-        type: 'paragraph',
-        children: [
-          {
-            type: 'text',
-            content: 'This is the text and ',
-            href: null,
-            italic: false,
-            bold: false
-          },
-          {
-            type: 'text',
-            bold: true,
-            content: 'some bold text '
-          },
-          {
-            type: 'text',
-            href: 'http://example.com',
-            content: 'some link'
-          }
-        ]
-      },
-      {
-        type: 'embed',
-        embedType: 'youtube',
-        youtubeId: 'eBYFOJxZx4Q',
-        caption: [{
-          type: 'text',
-          content: 'Here\'s a video from ',
-          href: null,
-          italic: false,
-          bold: false
-        }, {
-          type: 'text',
-          content: 'mic.com',
-          href: 'http://www.mic.com',
-          italic: true,
-          bold: false
-        }]
-      }
-    ]
+    var result = ``
+
+    result = articleTemplate({
+      title: 'title haha',
+      subtitle: 'subittle haha'
+    })
 
     resolve(
-      convertToFbia(articleJSON)
+      result
     )
   })
 }
