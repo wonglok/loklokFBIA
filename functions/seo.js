@@ -17,7 +17,7 @@ var composeMetaTags = ({ req, res }) => {
   return new Promise((resolve, reject) => {
     //
     resolve(
-      fbiaMetaTags(config.pageID)
+      `<meta property="fb:pages" content="${config.pageID}" />`
     )
     //
   })
@@ -31,7 +31,10 @@ var composeAppDiv = ({ req, res }) => {
         children: [
           {
             type: 'text',
-            content: 'This is the text and '
+            content: 'This is the text and ',
+            href: null,
+            italic: false,
+            bold: false
           },
           {
             type: 'text',
@@ -47,27 +50,28 @@ var composeAppDiv = ({ req, res }) => {
       },
       {
         type: 'embed',
-        embedType: 'image',
-        src: 'http://example/image.jpg',
-        width: 300,
-        height: 150
+        embedType: 'youtube',
+        youtubeId: 'eBYFOJxZx4Q',
+        caption: [{
+          type: 'text',
+          content: 'Here\'s a video from ',
+          href: null,
+          italic: false,
+          bold: false
+        }, {
+          type: 'text',
+          content: 'mic.com',
+          href: 'http://www.mic.com',
+          italic: true,
+          bold: false
+        }]
       }
     ]
 
     resolve(
-      fbiaContent(
-        convertToFbia(articleJSON)
-      )
+      convertToFbia(articleJSON)
     )
-    //
   })
-}
-
-var fbiaMetaTags = (pageID) => {
-  return `<meta property="fb:pages" content="${pageID}" />`
-}
-var fbiaContent = (content) => {
-  return content
 }
 
 var metaReplacer = (str, newStr) => {
