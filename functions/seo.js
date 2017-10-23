@@ -38,10 +38,10 @@ var composeAppDiv = ({ req, res }) => {
   return new Promise((resolve, reject) => {
     var result = ``
 
-    result = articleTemplate({
-      title: 'title haha',
-      subtitle: 'subittle haha'
-    })
+    // result = articleTemplate({
+    //   title: 'title haha',
+    //   subtitle: 'subittle haha'
+    // })
 
     resolve(
       result
@@ -68,8 +68,8 @@ var htmlTagReplacer = (str) => {
 }
 
 app.get('/rss/all', (req, res) => {
+  res.type('rss')
   res.send(rssTemplate({
-
   }))
 })
 
