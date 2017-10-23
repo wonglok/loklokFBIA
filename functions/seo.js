@@ -9,9 +9,13 @@ var Handlebars = require('handlebars')
 var fs = require('fs')
 var path = require('path')
 var appHTML = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf8')
-var articleHB = fs.readFileSync(path.resolve(__dirname, './templates/sample.handlebars'), 'utf8')
 
+var articleHB = fs.readFileSync(path.resolve(__dirname, './templates/sample.handlebars'), 'utf8')
 var articleTemplate = Handlebars.compile(articleHB)
+
+var rssHB = fs.readFileSync(path.resolve(__dirname, './templates/rss.handlebars'), 'utf8')
+var rssTemplate = Handlebars.compile(rssHB)
+
 
 const app = express()
 const cors = require('cors')({origin: true})
@@ -64,6 +68,12 @@ var htmlTagReplacer = (str) => {
   )
 }
 
+app.get('rss/all', (req, res) => {
+  res.send(rssTemplate({
+
+  }))
+})
+
 app.get('*', (req, res) => {
   // res.set('Cache-Control', 'public, max-age=60, s-maxage=180')
   Promise.all([
@@ -79,6 +89,9 @@ app.get('*', (req, res) => {
     })
     .then((processedString) => {
       res.send(processedString)
+    })
+    .catch(() => {
+      res.send(appHTML)
     })
 })
 
