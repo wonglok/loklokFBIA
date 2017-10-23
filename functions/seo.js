@@ -14,7 +14,7 @@ app.get('*', (req, res) => {
   // res.set('Cache-Control', 'public, max-age=60, s-maxage=180')
 
   var result = appHTML
-  result.replace(
+  result = result.replace(
     `<meta name=loklokfbia content=12345>`,
     '<meta name=loklokfbia content=45678>'
   )
