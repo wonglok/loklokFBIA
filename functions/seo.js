@@ -16,7 +16,6 @@ var articleTemplate = Handlebars.compile(articleHB)
 var rssHB = fs.readFileSync(path.resolve(__dirname, './templates/rss.handlebars'), 'utf8')
 var rssTemplate = Handlebars.compile(rssHB)
 
-
 const app = express()
 const cors = require('cors')({origin: true})
 app.use(cors)
@@ -68,7 +67,7 @@ var htmlTagReplacer = (str) => {
   )
 }
 
-app.get('rss/all', (req, res) => {
+app.get('/rss/all', (req, res) => {
   res.send(rssTemplate({
 
   }))
