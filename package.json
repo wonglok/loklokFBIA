@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "backup": "git add .; git commit -a -m \"backup on `date +'%Y-%m-%d %H:%M:%S'`\"; git push origin master;",
+    "deployfunc": "cd functions; npm install; cd ..; firebase deploy --only functions;",
     "deploy": "npm run backup; npm run build; cd functions; npm install; cd ..; firebase deploy;",
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
