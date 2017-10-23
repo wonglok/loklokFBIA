@@ -67,7 +67,7 @@ var htmlTagReplacer = (str) => {
   )
 }
 
-app.get('/rss/all', (req, res) => {
+app.get('/rss/dev', (req, res) => {
   res.type('rss')
   res.send(rssTemplate({
   }))
