@@ -7,7 +7,7 @@
   "scripts": {
     "backup": "git add .; git commit -a -m \"backup on `date +'%Y-%m-%d %H:%M:%S'`\"; git push origin master;",
     "deployfunc": "npm run copyToFunc; cd functions; npm install; cd ..; firebase deploy --only functions;",
-    "copyToFunc": "cp ./dist/index.html ./functions/dist/index.html; cp ./dist/service-worker.js ./functions/dist/service-worker.js;",
+    "copyToFunc": "cp ./dist/index.html ./functions/dist/index.html; cp ./dist/service-worker.js ./functions/dist/service-worker.js; mv ./dist/index.html ./dist/_index.html",
 
     "deploy": "npm run backup; npm run build; npm run copyToFunc; cd functions; npm install; cd ..; firebase deploy;",
     "dev": "node build/dev-server.js",
