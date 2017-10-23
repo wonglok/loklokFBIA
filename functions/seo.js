@@ -2,7 +2,7 @@ var functions = require('firebase-functions')
 // const admin = require('./admin').admin
 const express = require('express')
 
-const config = require('./config.js')
+const config = require('./config.js').config
 
 var fs = require('fs')
 var path = require('path')
