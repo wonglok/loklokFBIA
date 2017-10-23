@@ -23,7 +23,7 @@ var composeMetaTags = ({ req, res }) => {
     resolve(
       `
       <meta property="fb:pages" content="${config.pageID}" />
-      <link rel="canonical" href="http://example.com/article.html">
+      <link rel="canonical" href="http://loklok-fbia.firebaseapp.com">
       <meta property="op:markup_version" content="v1.0">
       `
     )
@@ -46,7 +46,7 @@ var composeAppDiv = ({ req, res }) => {
   })
 }
 
-var metaReplacer = (str, newStr) => {
+var headerReplacer = (str, newStr) => {
   return str.replace(`<meta name=loklokfbia content=12345>`, newStr)
 }
 var appDivReplacer = (str, newStr) => {
@@ -57,6 +57,13 @@ var appDivReplacer = (str, newStr) => {
   `)
 }
 
+var htmlTagReplacer = (str) => {
+  return str.reaplce(
+    `<html lang=en>`,
+    `<html lang=en prefix="op: http://media.facebook.com/op#">`
+  )
+}
+
 app.get('*', (req, res) => {
   // res.set('Cache-Control', 'public, max-age=60, s-maxage=180')
   Promise.all([
@@ -65,7 +72,8 @@ app.get('*', (req, res) => {
   ])
     .then((promises) => {
       var result = appHTML
-      result = metaReplacer(result, promises[0])
+      result = htmlTagReplacer(result)
+      result = headerReplacer(result, promises[0])
       result = appDivReplacer(result, promises[1])
       return result
     })
