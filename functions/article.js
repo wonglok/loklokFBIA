@@ -37,13 +37,13 @@ function getArticleObj () {
         typeIsEmbedYoutube: true,
         youtube: 'https://www.youtube.com/embed/M7lc1UVf-VE'
       },
-      {
-        typeIsEmbedCodePen: true,
-        codepen: 'https://codepen.io/wonglok/embed/xXEewp/?height=315&theme-id=0&default-tab=result&embed-version=2'
-      },
+      // {
+      //   typeIsEmbedCodePen: true,
+      //   codepen: 'https://codepen.io/wonglok/embed/xXEewp/?height=315&theme-id=0&default-tab=result&embed-version=2'
+      // },
       {
         typeIsFigureImage: true,
-        image: 'https://picsum.photos/200/300/?random',
+        image: 'https://picsum.photos/1024/1024/?random',
         caption: 'image caption fun fun fun'
       },
       {
@@ -60,7 +60,7 @@ function getArticleObj () {
       },
       {
         typeIsPoster: true,
-        image: 'https://picsum.photos/200/300/?random',
+        image: 'https://picsum.photos/1024/1024/?random',
         toptitle: 'happy happy',
         subtitle: 'sub-title text is fun fun fun fun',
         credit: 'credit text is funz'
@@ -68,11 +68,11 @@ function getArticleObj () {
       {
         typeIsSlideShow: true,
         images: [
-          { image: 'https://picsum.photos/108/192/?random' },
-          { image: 'https://picsum.photos/108/192/?random' },
-          { image: 'https://picsum.photos/108/192/?random' },
-          { image: 'https://picsum.photos/108/192/?random' },
-          { image: 'https://picsum.photos/108/192/?random' }
+          { image: 'https://picsum.photos/1080/1520/?random' },
+          { image: 'https://picsum.photos/1080/1520/?random' },
+          { image: 'https://picsum.photos/1080/1520/?random' },
+          { image: 'https://picsum.photos/1080/1520/?random' },
+          { image: 'https://picsum.photos/1080/1520/?random' }
         ],
         caption: {
           text: 'This is the caption',
@@ -89,7 +89,7 @@ function getArticleHTML (data) {
   )
 }
 
-function articleDataTemplate (article) {
+function getArticleDataForRSS (article) {
   return {
     title: `Hi`,
     link: 'http://loklok-fbia.firebaseapp.com/article',
@@ -101,23 +101,29 @@ function articleDataTemplate (article) {
   }
 }
 
+function getArticlesData (articles) {
+  articles = articles || []
+  return articles.map((item) => {
+    return getArticleDataForRSS(item)
+  })
+}
+
 exports.getRSS = () => {
   var data = {
     lastRefreshDate: new Date().toISOString(),
     articles: [
-      getArticleObj(),
       getArticleObj()
     ]
   }
-  return rssTemplate({
-    channel: config.pageName,
-    blogURL: config.blog,
-    description: config.desc,
-    lang: config.lang,
-    lastRefreshDate: data.lastRefreshDate,
-    articles: [
-      articleDataTemplate(data.articles[0]),
-      articleDataTemplate(data.articles[1])
-    ]
+  return new Promise((resolve, reject) => {
+    var ans = rssTemplate({
+      channel: config.pageName,
+      blogURL: config.blog,
+      description: config.desc,
+      lang: config.lang,
+      lastRefreshDate: data.lastRefreshDate,
+      articles: getArticlesData(data.articles)
+    })
+    resolve(ans)
   })
 }
