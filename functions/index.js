@@ -2,6 +2,6 @@
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 
-var app = require('./seo.js').app
+var app = require('./fbia.js').app
 exports.app = app
 

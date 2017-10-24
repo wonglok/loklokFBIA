@@ -10,8 +10,8 @@ var fs = require('fs')
 var path = require('path')
 var appHTML = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf8')
 
-var articleHB = fs.readFileSync(path.resolve(__dirname, './templates/sample.handlebars'), 'utf8')
-var articleTemplate = Handlebars.compile(articleHB)
+// var articleHB = fs.readFileSync(path.resolve(__dirname, './templates/sample.handlebars'), 'utf8')
+// var articleTemplate = Handlebars.compile(articleHB)
 
 var rssHB = fs.readFileSync(path.resolve(__dirname, './templates/rss.handlebars'), 'utf8')
 var rssTemplate = Handlebars.compile(rssHB)
@@ -61,10 +61,11 @@ var appDivReplacer = (str, newStr) => {
 }
 
 var htmlTagReplacer = (str) => {
-  return str.replace(
-    `<html lang=en>`,
-    `<html lang=en prefix="op: http://media.facebook.com/op#">`
-  )
+  return str
+  // return str.replace(
+  //   `<html lang=en>`,
+  //   `<html lang=en prefix="op: http://media.facebook.com/op#">`
+  // )
 }
 
 app.get('/rss/dev', (req, res) => {
@@ -73,6 +74,7 @@ app.get('/rss/dev', (req, res) => {
   }))
 })
 
+// firebase hosting
 app.get('/.well-known/acme-challenge/oB0iXwyzRXSMJgpcVD5zseEINNhOu4J9bnK-nRRFWBk', (req, res) => {
   var confirmCode = fs.readFileSync(path.resolve(__dirname, './code/oB0iXwyzRXSMJgpcVD5zseEINNhOu4J9bnK-nRRFWBk'), 'utf8')
   res.send(confirmCode)
