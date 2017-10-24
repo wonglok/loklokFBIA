@@ -4,17 +4,12 @@ const express = require('express')
 
 const config = require('./config.js').config
 // const convertToFbia = require('article-json-to-fbia')
-var Handlebars = require('handlebars')
 
 var fs = require('fs')
 var path = require('path')
 var appHTML = fs.readFileSync(path.resolve(__dirname, './dist/index.html'), 'utf8')
 
-// var articleHB = fs.readFileSync(path.resolve(__dirname, './templates/sample.handlebars'), 'utf8')
-// var articleTemplate = Handlebars.compile(articleHB)
-
-var rssHB = fs.readFileSync(path.resolve(__dirname, './templates/rss.handlebars'), 'utf8')
-var rssTemplate = Handlebars.compile(rssHB)
+var getRSS = require('./article.js').getRSS
 
 const app = express()
 const cors = require('cors')({origin: true})
@@ -70,8 +65,7 @@ var htmlTagReplacer = (str) => {
 
 app.get('/rss/dev', (req, res) => {
   res.type('rss')
-  res.send(rssTemplate({
-  }))
+  res.send(getRSS())
 })
 
 // firebase hosting

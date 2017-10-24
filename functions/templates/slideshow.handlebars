@@ -1,0 +1,18 @@
+<!-- A slideshow within your article -->
+<figure class="op-slideshow">
+  {{#each images}}
+  <figure>
+    <img src="{{ image }}" />
+  </figure>
+  {{/each}}
+  {{#if caption }}
+  <figcaption>
+    {{ caption.text }}
+    {{#if caption.attribution }}
+    <cite>
+      {{ caption.attribution }}
+    </cite>
+    {{/if }}
+  </figcaption>
+  {{/if }}
+</figure>

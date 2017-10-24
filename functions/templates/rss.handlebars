@@ -1,77 +1,31 @@
 <rss version="2.0"
 xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>OK-Wealthy</title>
-    <link>http://loklok-fbia.firebaseapp.com</link>
+    <title>{{ channel }}</title>
+    <link>{{ blogURL }}</link>
     <description>
-      Read our awesome news, every day.
+      {{ description }}
     </description>
-    <language>en-us</language>
-    <lastBuildDate>2014-12-11T04:44:16Z</lastBuildDate>
+    <language>{{ lang }}</language>
+    <lastBuildDate>{{ lastRefreshDate }}</lastBuildDate>
 
-    <item>
-      <title>This is an Instant Article</title>
-      <link>http://loklok-fbia.firebaseapp.com/article</link>
-      <guid>2fd4e1c67a2d28fced849ee1bb76e7391b93eb12</guid>
-      <pubDate>2014-12-11T04:44:16Z</pubDate>
-      <author>Mr. Author</author>
-      <description>This is my first Instant Article. How awesome is this?</description>
-      <content:encoded>
-        <![CDATA[
-        <!doctype html>
-        <html lang="en" prefix="op: http://media.facebook.com/op#">
-          <head>
-            <meta charset="utf-8">
-            <link rel="canonical" href="http://loklok-fbia.firebaseapp.com/article">
-            <meta property="op:markup_version" content="v1.0">
-          </head>
-          <body>
-            <article>
-              <header>
-                {{!-- The cover image shown inside your article --}}
-                <figure>
-                  <img src="https://picsum.photos/200/300/?random" />
-                  <figcaption>This image is amazing</figcaption>
-                </figure>
+    {{#each articles}}
+      <item>
+        <title>{{ title }}</title>
+        <link>{{ link }}</link>
+        <guid>{{ guid }}</guid>
+        <pubDate>{{ publishDate }}</pubDate>
+        <author>{{ author }}</author>
+        <description>{{ description }}</description>
+        <content:encoded>
+          <![CDATA[
 
-                {{!-- The title and subtitle shown in your article --}}
-                <h1> Title </h1>
-                <h2> Subtitle </h2>
+{{{ html }}}
 
-                {{!-- A kicker for your article --}}
-                <h3 class="op-kicker">
-                  This is a kicker
-                </h3>
-
-                {{!-- The author of your article --}}
-                <address>
-                  <a rel="facebook" href="http://facebook.com/okwealthy">OK-Wealthy</a>
-                  Brandon is a avid zombie hunter.
-                </address>
-
-                {{!-- The published and last modified time stamps --}}
-                <time class="op-published" dateTime="2014-12-11T04:44:16Z">December 11th, 4:44 PM</time>
-                <time class="op-modified" dateTime="2014-12-11T04:44:16Z">December 11th, 4:44 PM</time>
-              </header>
-
-              {{!-- Body text for your article --}}
-              <p> This is some Instant Article content. abcdefgg </p>
-              <p> This is some Instant Article content. abcdefgg </p>
-              <p> This is some Instant Article content. abcdefgg </p>
-
-              {{!-- An image within your article --}}
-              <figure>
-                <img src="https://picsum.photos/200/300/?random" />
-                <figcaption>This image is amazing</figcaption>
-              </figure>
-
-            </article>
-          </body>
-        </html>
-        ]]>
-      </content:encoded>
-    </item>
-
+          ]]>
+        </content:encoded>
+      </item>
+    {{/each}}
 
   </channel>
 </rss>

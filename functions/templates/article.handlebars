@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" prefix="op: http://media.facebook.com/op#">
+  <head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="http://loklok-fbia.firebaseapp.com/article">
+    <meta property="op:markup_version" content="v1.0">
+
+    <meta property="fb:article_style" content="{{ style }}">
+  </head>
+  <body>
+    <article>
+      <header>
+
+        <!-- The header image shown inside your article -->
+        <figure>
+          <img src="{{ header.heroImage }}" />
+          <figcaption>{{ header.heroCaption }}</figcaption>
+        </figure>
+
+        <!-- The title and subtitle shown in your article -->
+        <h1> {{ header.title }} </h1>
+        <h2> {{ header.subtitle }} </h2>
+
+        <!-- A kicker for your article -->
+        <h3 class="op-kicker">
+          {{ header.kicker }}
+        </h3>
+
+        <!-- The author of your article -->
+        <address>
+          <a rel="facebook" href="{{ header.authorPage }}">{{ header.authorName }}</a>
+        </address>
+
+        <!-- The published and last modified time stamps -->
+        <time class="op-published" dateTime="{{ header.publishDate }}">{{ header.publishDate }}</time>
+        <time class="op-modified" dateTime="{{ header.modifyDate }}">{{ header.modifyDate }}</time>
+      </header>
+
+      {{#each body }}
+        {{#if typeIsFigureImage}}
+          {{> FigureImage}}
+        {{/if}}
+        {{#if typeIsEmbedYoutube}}
+          {{> EmbedYoutube}}
+        {{/if}}
+        {{#if typeIsParagraph}}
+          {{> Paragraph}}
+        {{/if}}
+        {{#if typeIsPoster}}
+          {{> Poster}}
+        {{/if}}
+        {{#if typeIsSlideShow}}
+          {{> SlideShow}}
+        {{/if}}
+
+      {{/each}}
+
+    </article>
+  </body>
+</html>
