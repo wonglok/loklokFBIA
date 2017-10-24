@@ -1,5 +1,4 @@
 var functions = require('firebase-functions')
-// const admin = require('./admin').admin
 const express = require('express')
 
 const config = require('./config.js').config

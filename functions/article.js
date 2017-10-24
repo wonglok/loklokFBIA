@@ -1,4 +1,5 @@
 const config = require('./config.js').config
+// const admin = require('./admin').admin
 
 var fs = require('fs')
 var path = require('path')
@@ -101,7 +102,7 @@ function getArticleDataForRSS (article) {
   }
 }
 
-function getArticlesData (articles) {
+function getArticlesStructure (articles) {
   articles = articles || []
   return articles.map((item) => {
     return getArticleDataForRSS(item)
@@ -109,20 +110,21 @@ function getArticlesData (articles) {
 }
 
 exports.getRSS = () => {
-  var data = {
-    lastRefreshDate: new Date().toISOString(),
-    articles: [
-      getArticleObj()
-    ]
-  }
   return new Promise((resolve, reject) => {
+    var data = {
+      lastRefreshDate: new Date().toISOString(),
+      articles: [
+        getArticleObj()
+      ]
+    }
+
     var ans = rssTemplate({
       channel: config.pageName,
       blogURL: config.blog,
       description: config.desc,
       lang: config.lang,
       lastRefreshDate: data.lastRefreshDate,
-      articles: getArticlesData(data.articles)
+      articles: getArticlesStructure(data.articles)
     })
     resolve(ans)
   })

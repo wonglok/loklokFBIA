@@ -8,7 +8,6 @@
     "backup": "git add .; git commit -a -m \"backup on `date +'%Y-%m-%d %H:%M:%S'`\"; git push origin master;",
     "deployfunc": "npm run copyToFunc; cd functions; npm install; cd ..; firebase deploy --only functions;",
     "copyToFunc": "cp ./dist/index.html ./functions/dist/index.html; cp ./dist/service-worker.js ./functions/dist/service-worker.js; mv ./dist/index.html ./dist/_index.html",
-
     "deploy": "npm run backup; npm run build; npm run copyToFunc; cd functions; npm install; cd ..; firebase deploy;",
     "func": "firebase serve --only functions,hosting",
     "dev": "node build/dev-server.js",
@@ -17,6 +16,8 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.17.0",
+    "firebase": "^4.6.0",
     "vue": "^2.3.3",
     "vue-router": "^2.3.1"
   },
