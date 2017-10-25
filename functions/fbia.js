@@ -1,11 +1,14 @@
 var functions = require('firebase-functions')
 const express = require('express')
 
+const admin = require('./admin').admin
+
 const config = require('./config.js').config
 // const convertToFbia = require('article-json-to-fbia')
 var Handlebars = require('handlebars')
 var articleMetaTag = Handlebars.compile(`
-<meta property="og:url" content="${config.blog}/articles/{{ articleID }}" />
+      <meta property="og:type" content="article"/>
+      <meta property="og:url" content="${config.blog}/articles/{{ articleID }}" />
 `)
 
 var fs = require('fs')
@@ -18,20 +21,59 @@ const app = express()
 const cors = require('cors')({origin: true})
 app.use(cors)
 
+var getArticle = ({ articleID }) => {
+  return new Promise((resolve, reject) => {
+    admin.database().ref('/blog-data/articles').child(articleID).once('value').then((snapshot) => {
+      resolve(snapshot.val())
+    })
+  })
+}
+
 var composeMetaTags = ({ req, res, articleID }) => {
   return new Promise((resolve, reject) => {
-    var addon = ''
+    var addon = `
+    <meta property="og:type" content="blog"/>
+    <meta property="og:url" content="${config.blog}"/>
+    `
 
     if (articleID) {
-      addon = articleMetaTag({ articleID })
+      getArticle({ articleID }).then((value) => {
+        console.info(value)
+        addon = articleMetaTag({ articleID })
+        if (value) {
+          addon += `
+          <meta property="og:image" content="${value.header.heroImage}"/>
+          <meta property="og:title" content="${value.header.title}"/>
+          <meta property="og:description" content="${value.description}"/>
+          `
+        }
+
+        resolve(
+          `
+          <meta property="og:site_name" content="${config.desc}"/>
+          <meta property="fb:pages" content="${config.pageID}" />
+          ${addon}
+          `
+        )
+      }, () => {
+        resolve(
+          `
+          <meta property="og:site_name" content="${config.desc}"/>
+          <meta property="fb:pages" content="${config.pageID}" />
+          ${addon}
+          `
+        )
+      })
+    } else {
+      resolve(
+        `
+        <meta property="og:site_name" content="${config.desc}"/>
+        <meta property="fb:pages" content="${config.pageID}" />
+        ${addon}
+        `
+      )
     }
 
-    resolve(
-      `
-      <meta property="fb:pages" content="${config.pageID}" />
-      ${addon}
-      `
-    )
     //
   })
 }
