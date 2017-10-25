@@ -36,26 +36,28 @@
   <div>
 
     <div :key="index" v-for="(item, index) in blog.body">
-      <div v-if="item['typeIsEmbedYoutube'] === true">
+      <div class="youtube" v-if="item['typeIsEmbedYoutube'] === true">
         <input type="text" v-model="item.youtube" @input="() => { $emit('save', blog) }" />
         <iframe :src="item.youtube" />
       </div>
-      <div v-if="item['typeIsFigureImage'] === true">
+      <div class="image" v-if="item['typeIsFigureImage'] === true">
         <img class="figureImage" :src="item.image" />
         <input type="text" v-model="item.caption" @input="() => { $emit('save', blog) }" />
       </div>
-      <div v-if="item['typeIsParagraph'] === true">
-        <textarea v-model="item.text" />
+      <div class="paragraph" v-if="item['typeIsParagraph'] === true">
+        <!-- <textarea v-model="item.text" /> -->
+        <VueMediumEditor :text="item.text" :options="{ toolbar: { buttons: ['bold', 'italic', 'underline'] } }" v-on:edit="(operation) => { onEdit(operation, item) }" custom-tag="p">
+        </VueMediumEditor>
       </div>
 
-      <div v-if="item['typeIsPoster'] === true">
+      <div class="poster" v-if="item['typeIsPoster'] === true">
         <img :src="item.image" />
         <input type="text" v-model="item.toptitle" @input="() => { $emit('save', blog) }" />
         <input type="text" v-model="item.subtitle" @input="() => { $emit('save', blog) }" />
         <input type="text" v-model="item.credit" @input="() => { $emit('save', blog) }" />
       </div>
 
-      <div v-if="item['typeIsSlideShow'] === true">
+      <div class="slide-show" v-if="item['typeIsSlideShow'] === true">
         <input type="text" v-model="item.caption.text" @input="() => { $emit('save', blog) }" />
         <input type="text" v-model="item.caption.attribution" @input="() => { $emit('save', blog) }" />
         <img :src="img.image" :key="index" v-for="(img, index) in item.images" />
@@ -71,8 +73,12 @@
 
 <script>
 import { templates } from '@/system/blog'
+import VueMediumEditor from 'vue2-medium-editor'
 
 export default {
+  components: {
+    VueMediumEditor
+  },
   props: {
     blog: {}
   },
@@ -89,6 +95,23 @@ export default {
     }
   },
   methods: {
+    onEdit (operation, item) {
+      if (!operation.api.setBlur) {
+        operation.api.setBlur = true
+        operation.event.srcElement.addEventListener('blur', () => {
+          item.text = operation.event.srcElement.innerHTML
+          this.$emit('save', this.blog)
+        })
+      }
+      // item.text = operation.event.srcElement.innerHTML
+      clearTimeout(operation.api.timer)
+      operation.api.timer = setTimeout(() => {
+        if (item.text !== operation.event.srcElement.innerHTML) {
+          item.text = operation.event.srcElement.innerHTML
+          this.$emit('save', this.blog)
+        }
+      }, 10 * 1000)
+    },
     addYoutube (videoID) {
       templates.addYoutube({ videoID })
     },
@@ -101,7 +124,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '../../../node_modules/medium-editor/dist/css/medium-editor.css';
+@import '../../../node_modules/medium-editor/dist/css/themes/default.css';
+
 .editor {
   border: black solid 1px;
 }

@@ -142,7 +142,7 @@ export function makeBlog () {
     guid: Guid.raw(),
     description: 'lok\'s article description lok',
     header: {
-      heroImage: 'https://picsum.photos/1024/1024/?random',
+      heroImage: 'http://via.placeholder.com/1024x1024',
       heroCaption: 'Hero Caption when clicked',
       kicker: 'Tagline for your brand',
       title: 'Blog title',
@@ -159,7 +159,7 @@ export function makeBlog () {
       },
       {
         typeIsFigureImage: true,
-        image: 'https://picsum.photos/1024/1024/?random',
+        image: 'http://via.placeholder.com/1024x1024',
         caption: 'Caption of the image'
       }
     ]

@@ -99,7 +99,7 @@ function getArticleDataForRSS (article) {
     link: `${config.blog}` + '/articles/' + article.articleID,
     guid: article.guid,
     publishDate: article.header.publishDate,
-    author: article.header.author,
+    author: article.header.authorName,
     description: article.description,
     html: getArticleHTML(article)
   }
