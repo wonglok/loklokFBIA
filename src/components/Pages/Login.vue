@@ -3,18 +3,34 @@
 </template>
 
 <script>
-import { appState, readyRT, loginToGoogle } from '@/system/auth'
+import { appState, loginDefault, readyRT } from '@/system/auth'
 export default {
   data () {
     return {
       appState
     }
   },
+  mounted () {
+    readyRT().then(() => {
+      this.$router.push({
+        path: '/dashboard'
+      })
+    }, () => {
+      this.$router.push({
+        path: '/login'
+      })
+    })
+  },
   methods: {
     login () {
-      readyRT().then(() => {
+      loginDefault().then(() => {
+        this.$router.push({
+          path: '/dashboard'
+        })
       }, () => {
-        loginToGoogle()
+        this.$router.push({
+          path: '/login'
+        })
       })
     }
   }
