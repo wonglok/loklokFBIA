@@ -20,8 +20,6 @@ var composeMetaTags = ({ req, res }) => {
     resolve(
       `
       <meta property="fb:pages" content="${config.pageID}" />
-      <link rel="canonical" href="http://loklok-fbia.firebaseapp.com">
-      <meta property="op:markup_version" content="v1.0">
       `
     )
     //
