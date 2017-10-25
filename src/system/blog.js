@@ -7,6 +7,7 @@ import Guid from 'guid'
 export function getYoutube ({ videoID }) {
   return {
     typeIsEmbedYoutube: true,
+    videoID,
     youtube: `https://www.youtube.com/embed/${videoID}`
   }
 }
@@ -38,7 +39,8 @@ export function getPoster ({ image, toptitle, subtitle, credit }) {
 
 export function getSlideShow ({ images, caption, credit }) {
   return {
-    images: [...images],
+    typeIsSlideShow: true,
+    images: images || [],
     caption: {
       text: caption,
       attribution: credit

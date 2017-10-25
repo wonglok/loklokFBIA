@@ -1,7 +1,7 @@
 exports.config = {
   pageID: '1125835430762291',
-  pageName: 'okWealthy blog',
+  pageName: 'okWealthy',
   lang: 'en',
   blog: 'https://blog.okwealthy.com',
-  desc: 'My Favourite Blog'
+  desc: 'OK-Wealthy Blog'
 }
