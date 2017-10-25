@@ -147,7 +147,7 @@ export function makeBlog () {
       heroImage: 'http://via.placeholder.com/1024x1024',
       heroCaption: 'Hero Caption when clicked',
       kicker: 'Tagline for your brand',
-      title: 'Blog title',
+      title: 'Blog title - ' + Math.ceil(Math.random() * 1000000),
       subtitle: 'Sub title',
       authorPage: user.authorPage,
       authorName: user.authorName,

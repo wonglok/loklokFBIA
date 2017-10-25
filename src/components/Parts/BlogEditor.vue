@@ -123,7 +123,7 @@ export default {
   methods: {
     adder (index, dynamic, type) {
       if (type === 'typeIsParagraph') {
-        this.blog.body.splice(index + dynamic || 0, 0, templates.getParagraph({ words: '' }))
+        this.blog.body.splice(index + dynamic || 0, 0, templates.getParagraph({ words: 'text' }))
       }
       if (type === 'typeIsFigureImage') {
         this.blog.body.splice(index + dynamic || 0, 0, templates.getImage({ image: 'http://via.placeholder.com/1024x1024', caption: 'Caption' }))
@@ -161,9 +161,10 @@ export default {
       event.preventDefault()
       event.target.blur()
 
-      this.blog.body.splice(index + 1, 0, templates.getParagraph({ words: '' }))
+      this.blog.body.splice(index + 1, 0, templates.getParagraph({ words: 'text' }))
       setTimeout(() => {
         this.$refs['p-' + (index + 1)][0].focus()
+        this.$refs['p-' + (index + 1)][0].select()
         this.$emit('save', this.blog)
       }, 300)
     },
