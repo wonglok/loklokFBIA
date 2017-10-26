@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Login from '@/components/Pages/Login'
 import Dashboard from '@/components/Pages/Dashboard'
+import Article from '@/components/Pages/Article'
 
 import { appState, waitLoginInfo } from '@/system/auth'
 
@@ -29,6 +30,10 @@ export default new Router({
     {
       path: '/',
       component: Hello
+    },
+    {
+      path: '/articles/:id',
+      component: Article
     },
     {
       path: '/login',

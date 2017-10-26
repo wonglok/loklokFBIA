@@ -25,6 +25,8 @@ var getArticle = ({ articleID }) => {
   return new Promise((resolve, reject) => {
     admin.database().ref('/blog-data/articles').child(articleID).once('value').then((snapshot) => {
       resolve(snapshot.val())
+    }, () => {
+      reject(null)
     })
   })
 }
@@ -36,9 +38,18 @@ var composeMetaTags = ({ req, res, articleID }) => {
     <meta property="og:url" content="${config.blog}"/>
     `
 
+    function sendTags () {
+      resolve(
+        `
+        <meta property="og:site_name" content="${config.desc}"/>
+        <meta property="fb:pages" content="${config.pageID}" />
+        ${addon}
+        `
+      )
+    }
+
     if (articleID) {
       getArticle({ articleID }).then((value) => {
-        console.info(value)
         addon = articleMetaTag({ articleID })
         if (value) {
           addon += `
@@ -47,31 +58,12 @@ var composeMetaTags = ({ req, res, articleID }) => {
           <meta property="og:description" content="${value.description}"/>
           `
         }
-
-        resolve(
-          `
-          <meta property="og:site_name" content="${config.desc}"/>
-          <meta property="fb:pages" content="${config.pageID}" />
-          ${addon}
-          `
-        )
+        sendTags()
       }, () => {
-        resolve(
-          `
-          <meta property="og:site_name" content="${config.desc}"/>
-          <meta property="fb:pages" content="${config.pageID}" />
-          ${addon}
-          `
-        )
+        sendTags()
       })
     } else {
-      resolve(
-        `
-        <meta property="og:site_name" content="${config.desc}"/>
-        <meta property="fb:pages" content="${config.pageID}" />
-        ${addon}
-        `
-      )
+      sendTags()
     }
 
     //
