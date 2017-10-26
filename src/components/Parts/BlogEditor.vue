@@ -190,12 +190,19 @@ export default {
       event.target.blur()
 
       this.blog.body.splice(index + 1, 0, templates.getParagraph({ words: nextText || 'text' }))
+      this.$emit('save', this.blog)
+
       this.$nextTick(() => {
-        setTimeout(() => {
-          this.$refs['p-' + (index + 1)][0].ta.focus()
-          this.$refs['p-' + (index + 1)][0].ta.select()
-          this.$emit('save', this.blog)
-        }, 300)
+        var redo = () => {
+          try {
+            this.$refs['p-' + (index + 1)][0].ta.focus()
+            this.$refs['p-' + (index + 1)][0].ta.select()
+          } catch (e) {
+            console.log(e)
+            setTimeout(redo, 300)
+          }
+        }
+        setTimeout(redo, 300)
       })
     },
     saveAgain () {

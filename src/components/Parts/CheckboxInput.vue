@@ -40,6 +40,7 @@ export default {
 }
 .on,
 .off{
+  cursor: pointer;
   max-width: 150px;
   min-width: 50px;
   height: 40px;
