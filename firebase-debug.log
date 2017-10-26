@@ -1,0 +1,49 @@
+[debug] [2017-10-26T21:54:34.931Z] ----------------------------------------------------------------------
+[debug] [2017-10-26T21:54:34.935Z] Command:       /Users/lok/.nvm/versions/node/v7.9.0/bin/node /Users/lok/.nvm/versions/node/v7.9.0/bin/firebase serve --only functions,hosting
+[debug] [2017-10-26T21:54:34.935Z] CLI Version:   3.13.1
+[debug] [2017-10-26T21:54:34.935Z] Platform:      darwin
+[debug] [2017-10-26T21:54:34.935Z] Node Version:  v7.9.0
+[debug] [2017-10-26T21:54:34.936Z] Time:          Fri Oct 27 2017 05:54:34 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:34.936Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-26T21:54:34.954Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-26T21:54:34.955Z] > authorizing via signed-in user
+[debug] [2017-10-26T21:54:34.957Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-10-26T21:54:34.957Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/sGbwP0wnm03XWWLfDIozZqbF5WSEjy9Kwj30CsRKeZ4',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Oct 27 2017 05:54:34 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:35.100Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-26T21:54:35.107Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/loklok-fbia  
+ Fri Oct 27 2017 05:54:35 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:36.134Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-26T21:54:36.135Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/loklok-fbia/tokens  
+ Fri Oct 27 2017 05:54:36 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:37.212Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Volumes/Data/WONGLOK/WORK_IMPORTANT/WongLok/loklokFBIA'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2017-10-26T21:54:37.509Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/loklok-fbia  
+ Fri Oct 27 2017 05:54:37 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:37.509Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/loklok-fbia/apiKeys  
+ Fri Oct 27 2017 05:54:37 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:37.510Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/loklok-fbia  
+ Fri Oct 27 2017 05:54:37 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:38.599Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-26T21:54:38.599Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/186535374376/clients/_:getWebAppConfig  
+ Fri Oct 27 2017 05:54:38 GMT+0800 (HKT)
+[debug] [2017-10-26T21:54:38.698Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-26T21:54:38.752Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-26T21:54:39.478Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] ✔  hosting: Local server: http://localhost:5000
+
+[info] ✔  functions: app: http://localhost:5001/loklok-fbia/us-central1/app
+[info] [hosting] Rewriting /articles/-KxKbnCualk2NMVjXOCZ to local function app
+[info] [hosting] Rewriting /favicon.ico to local function app
+[info] [hosting] Rewriting /index.html?_sw-precache=455a03d2aef70dfee6ce8d2bb2a18300 to local function app
+[info] [hosting] Rewriting /articles/-KxKbnCualk2NMVjXOCZ to local function app
+[info] [hosting] Rewriting /favicon.ico to local function app

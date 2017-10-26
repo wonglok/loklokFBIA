@@ -38,9 +38,10 @@
         <div class="body-section">
           <div class="controls">
             <div class="youtube" v-if="item['typeIsEmbedYoutube'] === true">
-              <iframe :src="item.youtube" />
-              <br />
-              <input type="text" v-model="item.youtube" @input="() => { $emit('save', blog) }" />
+              <iframe class="youtube-player" :src="item.youtube" />
+              <!-- <br /> -->
+              <TextInput :title="'Youtube Embed Link'" v-model="item.youtube" @input="() => { $emit('save', blog) }" />
+              <!-- <input type="text" v-model="item.youtube" @input="() => { $emit('save', blog) }" /> -->
             </div>
             <div class="image" v-if="item['typeIsFigureImage'] === true">
               <Thumbnail :title="'Image'" @pick="$emit('pick-image', { blog: blog, object: item, member: 'image', desc: 'Please Select Image' })" :src="item.image" />
@@ -316,6 +317,9 @@ export default {
 .tool-bar{
   position: relative;
   border: #676767 solid 3px;
+  // border-top: #676767 solid 3px;
+  // border-bottom: #676767 solid 3px;
+
   // border: black solid 3px;
   height: 55px;
   display: flex;
@@ -353,11 +357,11 @@ export default {
   }
   &:hover button:nth-child(2n + 1) {
     opacity: 1;
-    transform: translateY(5px);
+    transform: translateY(0px);
   }
   &:hover button:nth-child(2n) {
     opacity: 1;
-    transform: translateY(-5px);
+    transform: translateY(-0px);
   }
   button:hover{
     text-decoration: underline;
@@ -373,5 +377,10 @@ export default {
   align-items: center;
 }
 
+.youtube-player{
+  width: 350px;
+  height: 200px;
+  border: black solid 0px;
+}
 
 </style>

@@ -13,7 +13,7 @@
 
   <BlogEditor class="simsim-edit" @back="(v) => { currentBlog = v; }" v-if="currentBlog" :blog="currentBlog" @save="saveBlog" @remove="removeBlog" @pick-image="(v) => { openImagePicker(v) }" />
   <BlogSim class="simsim" v-if="currentBlog" :blog="currentBlog" @pick-image="(v) => { openImagePicker(v) }" />
-  <ImagePicker v-show="imagePicker.show" :blog="imagePicker.blog" :object="imagePicker.object" :member="imagePicker.member" :desc="imagePicker.desc" @close="closeImagePicker()" class="image-picker" />
+  <ImagePicker v-show="imagePicker.show" :blog="imagePicker.blog" :object="imagePicker.object" :member="imagePicker.member" @save="saveBlog" :desc="imagePicker.desc" @close="closeImagePicker()" class="image-picker" />
   <!-- <pre>{{ store.blogStore }}</pre> -->
 
 </div>
@@ -93,6 +93,7 @@ export default {
   top: 0px;
   right: 414px;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
   width: 500px;
   height: calc(100% - 6px);
@@ -104,6 +105,7 @@ export default {
   top: 0px;
   right: 500px + 414px;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
   width: 500px;
   height: calc(100% - 6px);

@@ -82,6 +82,7 @@ export default {
       height: 100%;
       background-size: contain;
       background-position: center center;
+      background-repeat: no-repeat;
     }
 
   }

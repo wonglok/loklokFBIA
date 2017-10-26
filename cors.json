@@ -1,0 +1,7 @@
+[
+  {
+    "origin": ["https://blog.okwealthy.com","https://okwealthy.com","https://loklok-fbia.firebaseapp.com", "http://localhost:8080"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
