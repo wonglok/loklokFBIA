@@ -36,6 +36,7 @@ export default {
   flex-direction: column;
 }
 .sim{
+  min-width: 320px;
   display: inline-block;
 }
 </style>
