@@ -5,8 +5,8 @@
   </div>
 
   <div class="brand-like">
-    <div class="brand">brand</div>
-    <div class="like">like</div>
+    <div class="brand">{{ blog.header.authorName }}</div>
+    <div class="like"></div>
   </div>
 
   <div class="hr"></div>
@@ -104,6 +104,7 @@ export default {
   width: 414px;
   height: 100%;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .hero-image{
   width: 100%;
@@ -115,7 +116,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  // cursor: pointer;
 
   h3 {
     text-decoration: underline;

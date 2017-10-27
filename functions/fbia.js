@@ -65,8 +65,6 @@ var composeMetaTags = ({ req, res, articleID }) => {
     } else {
       sendTags()
     }
-
-    //
   })
 }
 

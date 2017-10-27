@@ -4,8 +4,6 @@
   <div class="border-left"></div>
   <div class="border-bottom"></div>
 
-
-
   <div :class="{ 'simsim-list': true }">
     <div class="header">
       <div class="left"  @click="logout">Logout</div>
@@ -13,7 +11,7 @@
       <div class="right" @click="makeBlog">Make Blog</div>
     </div>
 
-    <BlogList :store="store" @edit="(v) => { currentBlog = v; }" />
+    <BlogList :store="store" @go="(v) => { currentBlog = v; }" />
   </div>
 
   <BlogEditor class="simsim-edit" :focusItem="focusItem" @back="(v) => { currentBlog = v; }" v-if="currentBlog" :blog="currentBlog" @save="saveBlog" @remove="removeBlog" @pick-image="(v) => { openImagePicker(v) }" />
@@ -49,7 +47,8 @@ export default {
         desc: false
       },
       currentBlog: false,
-      store: store
+      store: store,
+      saveTimer: 0
     }
   },
   mounted () {
@@ -70,7 +69,10 @@ export default {
       makeBlog()
     },
     saveBlog (blog) {
-      saveBlog(blog.articleID, blog)
+      clearTimeout(this.saveTimer)
+      this.saveTimer = setTimeout(() => {
+        saveBlog(blog.articleID, blog)
+      }, 1234)
     },
     removeBlog (blog) {
       removeBlog(blog.articleID)
@@ -119,6 +121,7 @@ export default {
   border-bottom: none;
   box-sizing: border-box;
 
+  min-width: 200px;
   width: calc(100% - 500px - 414px + 6px);
   height: calc(100% - 6px);
   background-color: white;

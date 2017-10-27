@@ -333,18 +333,19 @@ export default {
   margin-top: 30px;
 }
 
-.tool-bar:after {
-  content: '+';
-  display: block;
-  position: absolute;
-  font-size: 30px;
-  top: calc(50% - 20px);
-  left: calc(50% - 15px);
-  transition: opacity 0.75s, transform 0.75s;
-}
+// .tool-bar:after {
+//   content: '+';
+//   display: block;
+//   position: absolute;
+//   font-size: 30px;
+//   top: calc(50% - 20px);
+//   left: calc(50% - 15px);
+//   transition: opacity 0.75s, transform 0.75s;
+// }
 .tool-bar{
   position: relative;
-  border: #676767 solid 3px;
+  border-top: #676767 solid 3px;
+  border-bottom: #676767 solid 3px;
   // border-top: #676767 solid 3px;
   // border-bottom: #676767 solid 3px;
 
@@ -354,14 +355,14 @@ export default {
   justify-content: space-around;
   align-items: center;
   transition: border 0.75s;
-  &:hover{
-    border: silver dashed 3px;
-    // border-bottom: silver solid 3px;
-  }
-  &:hover:after{
-    opacity: 0;
-    transform: translateY(-30px) rotate(180deg);
-  }
+  // &:hover{
+  //   border: silver dashed 3px;
+  //   // border-bottom: silver solid 3px;
+  // }
+  // &:hover:after{
+  //   opacity: 0;
+  //   transform: translateY(-30px) rotate(180deg);
+  // }
   button{
     border: red solid 0px;
     background-color: transparent;
@@ -375,22 +376,22 @@ export default {
     transition: transform 0.75s, opacity 0.75s;
     transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   }
-  button:nth-child(2n + 1) {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  button:nth-child(2n) {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  &:hover button:nth-child(2n + 1) {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  &:hover button:nth-child(2n) {
-    opacity: 1;
-    transform: translateY(-0px);
-  }
+  // button:nth-child(2n + 1) {
+  //   opacity: 0;
+  //   transform: translateY(-5px);
+  // }
+  // button:nth-child(2n) {
+  //   opacity: 0;
+  //   transform: translateY(5px);
+  // }
+  // &:hover button:nth-child(2n + 1) {
+  //   opacity: 1;
+  //   transform: translateY(0px);
+  // }
+  // &:hover button:nth-child(2n) {
+  //   opacity: 1;
+  //   transform: translateY(-0px);
+  // }
   button:hover{
     text-decoration: underline;
   }

@@ -1,6 +1,7 @@
 <template>
-<div>
-  <BlogSim v-if="currentBlog" class="simsim" :blog="currentBlog"/>
+<div class="home">
+ <BlogSim v-if="currentBlog" class="sim" :blog="currentBlog"/>
+ <h3  @click="$router.push({ path: '/' })">Home</h3>
 </div>
 </template>
 
@@ -18,13 +19,19 @@ export default {
     }
   },
   mounted () {
-    getOneBlog(this.$route.params.id).then((blog) => {
+    getOneBlog({ articleID: this.$route.params.id }).then((blog) => {
+      console.log(blog)
       this.currentBlog = blog
     })
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+.home{
+  display: flex;
+}
+.sim{
+  display: inline-block;
+}
 </style>

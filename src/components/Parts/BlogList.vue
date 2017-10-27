@@ -1,10 +1,9 @@
 <template>
 <ul>
-  <li :key="blog['.key']" v-for="blog in store.blogs">
-    <button @click="() => { $emit('edit', blog) }">Edit</button>
+  <li class="options" :key="blog['.key']" v-for="blog in store.blogs" @click="() => { $emit('go', blog) }">
     {{ blog.header.title }}
     <br />
-    {{ blog.header.publishDate }}
+    {{ getFormatedDate(blog.header.publishDate) }}
   </li>
 </ul>
 </template>
@@ -13,10 +12,27 @@
 export default {
   props: {
     store: {}
+  },
+  methods: {
+    getFormatedDate (date) {
+      date = new Date(Date.parse(date))
+      var mm = date.getMonth() + 1 // getMonth() is zero-based
+      var dd = date.getDate()
+
+      return [date.getFullYear(),
+        (mm > 9 ? '' : '0') + mm,
+        (dd > 9 ? '' : '0') + dd
+      ].join('-')
+    }
   }
 }
 </script>
 
-<style>
-
+<style scoped>
+.options{
+  cursor: pointer;
+}
+.options:hover{
+  text-decoration: underline;
+}
 </style>
