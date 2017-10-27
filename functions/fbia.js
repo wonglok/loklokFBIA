@@ -98,6 +98,13 @@ var htmlTagReplacer = (str) => {
   // )
 }
 
+app.get('/rss/prod', (req, res) => {
+  res.type('rss')
+  getRSS({ req, res }).then((rss) => {
+    res.send(rss)
+  })
+})
+
 app.get('/rss/dev', (req, res) => {
   res.type('rss')
   getRSS({ req, res }).then((rss) => {
