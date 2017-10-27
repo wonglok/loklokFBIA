@@ -1,7 +1,7 @@
 <template>
 <div class="home">
- <BlogSim v-if="currentBlog" class="sim" :blog="currentBlog"/>
  <h3  @click="$router.push({ path: '/' })">Home</h3>
+ <BlogSim v-if="currentBlog" class="sim" :blog="currentBlog"/>
 </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
 <style scoped>
 .home{
   display: flex;
+  flex-direction: column;
 }
 .sim{
   display: inline-block;
