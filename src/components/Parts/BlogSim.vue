@@ -5,7 +5,9 @@
   </div>
 
   <div class="brand-like">
-    <div class="brand">{{ blog.header.authorName }}</div>
+    <div class="brand">
+      <img src="../../assets/okWealthy.png" />
+    </div>
     <div class="like"></div>
   </div>
 
@@ -131,12 +133,16 @@ export default {
     margin-left: 30px;
     width: 230px;
     height: 62px;
-    background-color: silver;
+    // background-color: silver;
     display: flex;
     justify-content: center;
     align-items: center;
+    img {
+      width: 100%;
+    }
   }
   .like{
+    visibility: hidden;
     margin-right: 30px;
     width: 62px;
     height: 62px;
@@ -148,7 +154,7 @@ export default {
 }
 
 .hr{
-  width: 350px;
+  width: calc(100% - 60px);
   height: 1px;
   background-color: black;
   margin-left: 30px;

@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      width: window.innerWidth > 414 ? 414 - 6 : window.innerWidth - 6,
+      width: (window.innerWidth > 414 ? 414 : window.innerWidth < 320 ? 320 : window.innerWidth),
       index: 0
     }
   },
