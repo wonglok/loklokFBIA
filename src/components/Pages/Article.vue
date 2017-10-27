@@ -1,7 +1,7 @@
 <template>
 <div class="home">
- <h3  @click="$router.push({ path: '/' })">Home</h3>
- <BlogSim v-if="currentBlog" class="sim" :blog="currentBlog"/>
+ <h3 @click="$router.push({ path: '/' })">Home</h3>
+ <BlogSim v-if="currentBlog" class="sim" :blog="currentBlog" :style="scaler" />
 </div>
 </template>
 
@@ -15,6 +15,9 @@ export default {
   },
   data () {
     return {
+      scaler: {
+        width: (window.innerWidth > 414 ? 414 : window.innerWidth) + 'px'
+      },
       currentBlog: false
     }
   },

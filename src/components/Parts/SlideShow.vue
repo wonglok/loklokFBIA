@@ -6,7 +6,7 @@
       <div
       @click="$emit('click', { item: img })"
       class="slide-page" :style="{
-        left: (index * 408) + 'px',
+        left: (index * width) + 'px',
         backgroundImage: 'url(' + img.image + ')'
       }" :key="index" v-for="(img, index) in item.images"></div>
     </div>
@@ -31,6 +31,7 @@ export default {
   },
   data () {
     return {
+      width: window.innerWidth > 414 ? 414 - 6 : window.innerWidth - 6,
       index: 0
     }
   },
