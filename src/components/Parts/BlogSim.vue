@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div class="body-items" :key="index" v-for="(item, index) in blog.body">
+  <div @click="() => { $emit('focus-item', false); $nextTick(() => { $emit('focus-item', index) }) }" class="body-items" :key="index" v-for="(item, index) in blog.body">
     <!-- youtube -->
     <div class="sub-item youtube" v-if="item['typeIsEmbedYoutube'] === true">
       <iframe class="youtube-player" :src="item.youtube" />

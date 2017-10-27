@@ -33,7 +33,7 @@
         <button @click="adder(0, 0, 'typeIsEmbedYoutube')">+Youtube</button>
       </div>
 
-      <div :key="index" v-for="(item, index) in blog.body">
+      <div :ref="'body-item-' + index" :key="index" v-for="(item, index) in blog.body">
 
         <div class="body-section">
           <div class="controls">
@@ -67,17 +67,19 @@
             </div>
 
             <div class="slide-show" v-if="item['typeIsSlideShow'] === true">
-              <Thumbnail
-                :style="{
-                  display: 'inline-block',
-                  width: '100px',
-                  margin: '10px'
-                }"
-                :key="index" v-for="(img, index) in item.images"
-                :title="'Slide ' + (index + 1)"
-                @pick="$emit('pick-image', { blog: blog, object: img, member: 'image', desc: 'Please Select Slideshow Image' })"
-                :src="img.image"
-              />
+              <div class="slide-show-flex">
+                <Thumbnail
+                  :style="{
+                    display: 'inline-block',
+                    width: '100px',
+                    margin: '10px'
+                  }"
+                  :key="index" v-for="(img, index) in item.images"
+                  :title="'Slide ' + (index + 1)"
+                  @pick="$emit('pick-image', { blog: blog, object: img, member: 'image', desc: 'Please Select Slideshow Image' })"
+                  :src="img.image"
+                />
+              </div>
 
               <TextInput :title="'Caption'" v-model="item.caption.text" @input="() => { $emit('save', blog) }" />
               <TextInput :title="'Credit'" v-model="item.caption.attribution" @input="() => { $emit('save', blog) }" />
@@ -106,7 +108,7 @@
 
     </div>
 
-    <pre>{{ blog }}</pre>
+    <!-- <pre>{{ blog }}</pre> -->
   </div>
 
 </div>
@@ -129,6 +131,7 @@ export default {
     // VueMediumEditor
   },
   props: {
+    focusItem: {},
     blog: {}
   },
   data () {
@@ -140,6 +143,26 @@ export default {
         'typeIsEmbedYoutube',
         'typeIsSlideShow'
       ]
+    }
+  },
+  watch: {
+    focusItem () {
+      var redo = () => {
+        try {
+          var el = this.$refs['body-item-' + this.focusItem][0]
+          var editor = this.$refs['editor']
+          var scrollTop = editor.scrollTop
+          var top = el.getBoundingClientRect().top
+          editor.scrollTo(0, scrollTop + top)
+          console.log(this.focusItem, scrollTop + top)
+        } catch (e) {
+          console.log(e)
+          setTimeout(redo, 300)
+        }
+      }
+      if (this.focusItem !== false) {
+        setTimeout(redo, 300)
+      }
     }
   },
   computed: {
@@ -381,6 +404,13 @@ export default {
   width: 350px;
   height: 200px;
   border: black solid 0px;
+}
+
+.slide-show-flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 </style>

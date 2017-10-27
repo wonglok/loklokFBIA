@@ -154,7 +154,7 @@ export function autoRefresher () {
 }
 
 export const store = {
-  imagePageSize: 4,
+  imagePageSize: 25,
   imageLoaderCursor: 0,
   imageStore: {},
   setImageByKey (key, val) {
@@ -243,7 +243,7 @@ export function makeBlog () {
     style: 'instapress',
     articleID: newItemKey,
     guid: Guid.raw(),
-    description: 'lok\'s article description lok',
+    description: 'Description of this article.',
     header: {
       heroImage: 'http://via.placeholder.com/1024x1024',
       heroCaption: 'Hero Caption when clicked',

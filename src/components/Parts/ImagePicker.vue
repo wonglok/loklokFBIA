@@ -6,23 +6,24 @@
     <div class="right" @click="() => { $emit('close') }">Done</div>
   </div>
   <div class="container">
+
     {{ loading }}
     <input type="file" multiple accept="image/*" ref="file-button" value="Choose your Photos">
 
     <button v-if="canOlder" @click="older()">Older</button>
     <button v-if="canNewer" @click="newer()">Newer</button>
     <div :key="imgKey" v-for="(img, imgKey) in store.images" >
-      <img :src="img.url" />
+      <img class="image-preview" :src="img.url" />
       <button @click="() => { updateImage({ img }) }">Update</button>
       <button @click="() => { removeImage({ img }) }">X</button>
     </div>
 
-    <pre>{{ store.images }}</pre>
+    <!-- <pre>{{ store.images }}</pre>
 
     <pre>{{ blog }}</pre>
     <pre>{{ object }}</pre>
     <pre>{{ member }}</pre>
-    <pre>{{ desc }}</pre>
+    <pre>{{ desc }}</pre> -->
 
   </div>
 </div>
@@ -118,6 +119,12 @@ export default {
     margin-right: 20px;
     cursor: pointer;
   }
+}
+
+.image-preview{
+  max-height: 200px;
+  max-width: 200px;
+  display: inline-block;
 }
 
 

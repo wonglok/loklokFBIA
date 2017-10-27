@@ -4,15 +4,20 @@
   <div class="border-left"></div>
   <div class="border-bottom"></div>
 
+
+
   <div :class="{ 'simsim-list': true }">
-    Dashbaord
-    <button @click="logout">Logout</button>
-    <button @click="makeBlog">makeBlog</button>
+    <div class="header">
+      <div class="left"  @click="logout">Logout</div>
+      <div class="title">Dashbaord</div>
+      <div class="right" @click="makeBlog">Make Blog</div>
+    </div>
+
     <BlogList :store="store" @edit="(v) => { currentBlog = v; }" />
   </div>
 
-  <BlogEditor class="simsim-edit" @back="(v) => { currentBlog = v; }" v-if="currentBlog" :blog="currentBlog" @save="saveBlog" @remove="removeBlog" @pick-image="(v) => { openImagePicker(v) }" />
-  <BlogSim class="simsim" v-if="currentBlog" :blog="currentBlog" @pick-image="(v) => { openImagePicker(v) }" />
+  <BlogEditor class="simsim-edit" :focusItem="focusItem" @back="(v) => { currentBlog = v; }" v-if="currentBlog" :blog="currentBlog" @save="saveBlog" @remove="removeBlog" @pick-image="(v) => { openImagePicker(v) }" />
+  <BlogSim @focus-item="(v) => { focusItem = v }" class="simsim" v-if="currentBlog" :blog="currentBlog" @pick-image="(v) => { openImagePicker(v) }" />
   <ImagePicker v-show="imagePicker.show" :blog="imagePicker.blog" :object="imagePicker.object" :member="imagePicker.member" @save="saveBlog" :desc="imagePicker.desc" @close="closeImagePicker()" class="image-picker" />
   <!-- <pre>{{ store.blogStore }}</pre> -->
 
@@ -35,6 +40,7 @@ export default {
   },
   data () {
     return {
+      focusItem: false,
       imagePicker: {
         show: false,
         blog: false,
@@ -81,7 +87,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .simsim{
   position: fixed;
@@ -103,11 +109,16 @@ export default {
 .simsim-list{
   position: fixed;
   top: 0px;
-  right: 500px + 414px;
+  right: 500px + 414px - 6px;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 
-  width: 500px;
+  border: #676767 solid 3px;
+  border-top: none;
+  border-bottom: none;
+  box-sizing: border-box;
+
+  width: calc(100% - 500px - 414px + 6px);
   height: calc(100% - 6px);
   background-color: white;
   margin-top: 3px;
@@ -156,4 +167,28 @@ export default {
   background-color: #676767;
   transform: translateZ(0.011px);
 }
+
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: #676767 solid 3px;
+  height: 50px;
+  .left{
+    text-decoration: underline;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  .title{
+    font-weight: bold;
+  }
+  .right{
+    text-decoration: underline;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+}
+
 </style>
