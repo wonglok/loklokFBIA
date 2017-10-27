@@ -7,14 +7,20 @@
   </div>
   <div class="container">
 
-    {{ loading }}
     <input type="file" multiple accept="image/*" ref="file-button" value="Choose your Photos">
+    <span v-if="loading > 0">Loading Remain: {{ loading }}</span>
+    <br />
 
     <button v-if="canOlder" @click="older()">Older</button>
     <button v-if="canNewer" @click="newer()">Newer</button>
+
+    <br />
+    AutoClose: <input type="checkbox" v-model="autoclose">
+
+    <br />
+
     <div :key="imgKey" v-for="(img, imgKey) in store.images" >
-      <img class="image-preview" :src="img.url" />
-      <button @click="() => { updateImage({ img }) }">Update</button>
+      <img class="image-preview" :src="img.url" @click="() => { updateImage({ img }); if (autoclose) { $emit('close'); } }" />
       <button @click="() => { removeImage({ img }) }">X</button>
     </div>
 
@@ -44,6 +50,7 @@ export default {
   },
   data () {
     return {
+      autoclose: true,
       store,
       loading: 0
     }

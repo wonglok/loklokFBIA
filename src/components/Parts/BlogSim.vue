@@ -40,7 +40,7 @@
 
     <!-- image -->
     <div class="image-block" v-if="item['typeIsFigureImage'] === true">
-      <img class="image-item" :src="item.image" />
+      <img class="image-item" :src="item.image" @click="$emit('pick-image', { blog: blog, object: item, member: 'image', desc: 'Please Select Image' })" />
       <p>{{ item.caption }}</p>
     </div>
 
@@ -50,7 +50,7 @@
     </div>
 
     <!-- poster -->
-    <div class="poster" v-if="item['typeIsPoster'] === true" :style="{ backgroundImage: 'url('+ item.image +')' }">
+    <div @click="$emit('pick-image', { blog: blog, object: item, member: 'image', desc: 'Please Select Image' })" class="poster" v-if="item['typeIsPoster'] === true" :style="{ backgroundImage: 'url('+ item.image +')' }">
       <div class="top-title">{{ item.toptitle }}</div>
       <div class="bottom-title">{{ item.subtitle }}</div>
     </div>
@@ -59,7 +59,7 @@
     </div>
 
     <!-- slideshow -->
-    <SlideShow :item="item" />
+    <SlideShow :item="item" @click="({ item }) => { $emit('pick-image', { blog: blog, object: item, member: 'image', desc: 'Please Select Image' }) }" />
 
   </div>
 

@@ -106,10 +106,11 @@ export default {
   background-color: white;
   margin-top: 3px;
 }
+
 .simsim-list{
   position: fixed;
   top: 0px;
-  right: 500px + 414px - 6px;
+  right: 500px + 414px - 3px;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 

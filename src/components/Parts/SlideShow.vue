@@ -3,7 +3,9 @@
 
   <div class="slide-show" v-if="item['typeIsSlideShow'] === true">
     <div class="slide-show-con" :style="transStyle()">
-      <div class="slide-page" :style="{
+      <div
+      @click="$emit('click', { item: img })"
+      class="slide-page" :style="{
         left: (index * 408) + 'px',
         backgroundImage: 'url(' + img.image + ')'
       }" :key="index" v-for="(img, index) in item.images"></div>

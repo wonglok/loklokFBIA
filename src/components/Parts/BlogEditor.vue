@@ -150,6 +150,11 @@ export default {
       var redo = () => {
         try {
           var el = this.$refs['body-item-' + this.focusItem][0]
+          el.style.outline = 'red solid 3px'
+          setTimeout(() => {
+            el.style.transition = 'outline-color 1s'
+            el.style.outline = 'white solid 3px'
+          }, 1000)
           var editor = this.$refs['editor']
           var scrollTop = editor.scrollTop
           var top = el.getBoundingClientRect().top

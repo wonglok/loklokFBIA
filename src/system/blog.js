@@ -72,9 +72,12 @@ export function getOneBlog ({ articleID }) {
   .then((response) => {
     store.blogStore = {
       ...store.blogStore,
-      [articleID]: response.data
+      [articleID]: {
+        '.key': articleID,
+        ...response.data
+      }
     }
-    return store.blogs
+    return store.blogStore[articleID]
   })
 }
 
