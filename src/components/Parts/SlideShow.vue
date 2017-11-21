@@ -15,7 +15,7 @@
   </div>
   <div class="sub-item slide-show-caption" v-if="item['typeIsSlideShow'] === true">
     {{ item.caption.text }}
-  <br />
+    <br />
     {{ item.caption.attribution }}
     <!-- <input type="text" v-model="item.caption.text" @input="() => { $emit('save', blog) }" />
     <input type="text" v-model="item.caption.attribution" @input="() => { $emit('save', blog) }" /> -->

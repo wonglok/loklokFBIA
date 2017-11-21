@@ -1,7 +1,7 @@
 <template>
 <div class="home">
- <h3 @click="$router.push({ path: '/' })">Home</h3>
- <BlogSim v-if="currentBlog" class="sim" :blog="currentBlog" :style="scaler" />
+  <h3 @click="$router.push({ path: '/' })">Home</h3>
+  <BlogSim v-if="currentBlog" class="sim" :blog="currentBlog" :style="scaler" />
 </div>
 </template>
 
@@ -37,6 +37,5 @@ export default {
 }
 .sim{
   min-width: 320px;
-  display: inline-block;
 }
 </style>

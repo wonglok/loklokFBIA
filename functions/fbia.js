@@ -96,6 +96,43 @@ var htmlTagReplacer = (str) => {
   // )
 }
 
+function convert (obj) {
+  let keys = Object.keys(obj)
+  return keys.map((key) => {
+    return {
+      '.key': key,
+      item: obj[key]
+    }
+  })
+}
+
+var sm = require('sitemap');
+
+app.get('/sitemap.xml', (req, res) => {
+  var articles = admin.database().ref('/blog-data/articles')
+  articles.once('value').then((snapshot) => {
+    let items = convert(snapshot.val())
+
+    if (items) {
+      var sitemap = sm.createSitemap({
+        hostname: 'https://blog.okwealthy.com',
+        cacheTime: 600000
+      })
+      sitemap.add({ url: '/' })
+      items.forEach((page) => {
+        sitemap.add({ url: '/articles/' + page['.key'] })
+      })
+      sitemap.toXML(function (err, xml) {
+        if (err) {
+          return res.status(500).end()
+        }
+        res.header('Content-Type', 'application/xml')
+        res.send(xml)
+      })
+    }
+  })
+})
+
 app.get('/rss/prod', (req, res) => {
   res.type('rss')
   getRSS({ req, res }).then((rss) => {
