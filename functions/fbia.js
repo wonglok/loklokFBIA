@@ -106,10 +106,9 @@ function convert (obj) {
   })
 }
 
-var sm = require('sitemap');
-
+var sm = require('sitemap')
 app.get('/sitemap.xml', (req, res) => {
-  var articles = admin.database().ref('/blog-data/articles')
+  var articles = admin.database().ref('/blog-data/articles').limitToLast(1000)
   articles.once('value').then((snapshot) => {
     let items = convert(snapshot.val())
 
